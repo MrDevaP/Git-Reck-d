@@ -46,7 +46,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void validate(String userName, String Password) {
-        if (userName == "user" && Password == "pass") {
+        if (userName.equals("user") && Password.equals("pass")) {
             Intent goToApp = new Intent(LoginScreen.this, FirstApplicationScreen.class);
             startActivity(goToApp);
         } else {
