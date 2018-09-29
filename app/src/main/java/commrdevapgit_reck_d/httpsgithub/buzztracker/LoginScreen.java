@@ -45,10 +45,12 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-    private void validate(String userName, String Password) {
-        if (userName.equals("user") && Password.equals("pass")) {
+    private void validate(String Username, String Password) {
+        if (User.getUsers().containsKey(Username) && Password.equals(((User) (User.getUsers().get(Username))).getPassword())) {
             Intent goToApp = new Intent(LoginScreen.this, FirstApplicationScreen.class);
             startActivity(goToApp);
+        } else if (Username.equals("") || Password.equals("")) {
+            failedLogin.setText("Please enter a username and password to login.");
         } else {
             failedLogin.setText("Incorrect Login. Please try again.");
         }
