@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class FirstApplicationScreen extends AppCompatActivity {
 
-    private Button logout;
+    private Button logout, locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,12 +16,21 @@ public class FirstApplicationScreen extends AppCompatActivity {
         setContentView(R.layout.activity_first_application_screen);
 
         logout = (Button) findViewById(R.id.btnLogout);
+        locations = (Button) findViewById(R.id.btnLocations);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToWelcome =new Intent(FirstApplicationScreen.this, WelcomeScreen.class);
                 startActivity(goToWelcome);
+            }
+        });
+
+        locations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToLocationsScreen = new Intent(FirstApplicationScreen.this, LocationsScreen.class);
+                startActivity(goToLocationsScreen);
             }
         });
     }

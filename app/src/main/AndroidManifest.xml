@@ -18,7 +18,13 @@
         </activity>
         <activity android:name=".LoginScreen" />
         <activity android:name=".FirstApplicationScreen" />
-        <activity android:name=".RegistrationScreen"></activity>
+        <activity android:name=".RegistrationScreen" />
+        <activity
+            android:name=".LocationsScreen"
+            android:label="@string/title_activity_locations_screen" />
+        <activity
+            android:name=".LocationDetailsScreen"
+            android:label="@string/title_activity_location_details_screen"></activity>
     </application>
 
 </manifest>
