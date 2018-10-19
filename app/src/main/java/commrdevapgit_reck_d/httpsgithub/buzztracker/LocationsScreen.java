@@ -18,17 +18,17 @@ public class LocationsScreen extends Activity {
         setContentView(R.layout.activity_locations_screen);
         Set<String> locations = Location.getLocations().keySet();
         for (String l: locations) {
-            final Button newLocation = new Button(this);
-            newLocation.setText(l);
+            final Button location = new Button(this);
+            location.setText(l);
             LinearLayout layoutLocation = (LinearLayout) findViewById(R.id.layoutLocation);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutLocation.addView(newLocation, params);
+            layoutLocation.addView(location, params);
 
-            newLocation.setOnClickListener(new View.OnClickListener() {
+            location.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent goToDetails = new Intent(LocationsScreen.this, LocationDetailsScreen.class);
-                    goToDetails.putExtra("LocationName", newLocation.getText().toString());
+                    goToDetails.putExtra("LocationName", location.getText().toString());
                     startActivity(goToDetails);
                 }
             });

@@ -19,6 +19,8 @@ public class RegistrationScreen extends AppCompatActivity {
     private RadioGroup type;
     private TextView failedRegistration;
 
+    public static boolean isLocationEmployee = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,7 @@ public class RegistrationScreen extends AppCompatActivity {
                 GeneralUser newUser = new GeneralUser(Username, Password);
             } else if (selectedID == R.id.radioLocationEmployee) {
                 LocationEmployee newUser = new LocationEmployee(Username, Password);
+                isLocationEmployee = true;
             } else if (selectedID == R.id.radioLocationManager) {
                 LocationManager newUser = new LocationManager(Username, Password);
             } else if (selectedID == R.id.radioAdmin) {

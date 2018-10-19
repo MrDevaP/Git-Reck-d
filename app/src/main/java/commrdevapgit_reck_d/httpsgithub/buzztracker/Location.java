@@ -7,6 +7,7 @@ public class Location {
     private String name, type, address, phoneNumber;
     private float latitude, longitude;
     private static HashMap<String, Location> locations = new HashMap<>();
+    private HashMap<String, Donation> donations = new HashMap<>();
 
 
     public Location(String name, String type, String address, String phoneNumber, float latitude, float longitude) {
@@ -22,8 +23,15 @@ public class Location {
         locations.put(name, this);
     }
 
+    public void addDonation(Donation item) {
+        donations.put(item.getShortDescription(), item);
+    }
     public static HashMap getLocations() {
         return locations;
+    }
+
+    public HashMap getDonations() {
+        return donations;
     }
 
     public String getName() {
