@@ -10,7 +10,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class RegistrationScreen extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+
+public class RegistrationScreen extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
     private Button cancel;
@@ -18,6 +20,7 @@ public class RegistrationScreen extends AppCompatActivity {
     private EditText password;
     private RadioGroup type;
     private TextView failedRegistration;
+    private FirebaseAuth mAuth;
 
     public static boolean isLocationEmployee = false;
 
@@ -32,23 +35,28 @@ public class RegistrationScreen extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         type = (RadioGroup) findViewById(R.id.radioTypes);
         failedRegistration = (TextView) findViewById(R.id.failedRegistration);
+        mAuth = FirebaseAuth.getInstance();
 
         failedRegistration.setText("");
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerUser(username.getText().toString(), password.getText().toString());
-            }
-        });
+        register.setOnClickListener(this);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToWelcome =new Intent(RegistrationScreen.this, WelcomeScreen.class);
+        cancel.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnRegister:
+                finish();
+                registerUser(username.getText().toString(), password.getText().toString());
+                break;
+
+            case R.id.btnCancel:
+                Intent goToWelcome = new Intent(RegistrationScreen.this, WelcomeScreen.class);
                 startActivity(goToWelcome);
-            }
-        });
+                break;
+        }
     }
 
     private void registerUser(String Username, String Password) {

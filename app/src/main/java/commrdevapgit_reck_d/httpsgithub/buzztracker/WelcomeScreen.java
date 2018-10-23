@@ -6,16 +6,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-public class WelcomeScreen extends AppCompatActivity {
+public class WelcomeScreen extends AppCompatActivity implements View.OnClickListener {
 
     private Button login;
     private Button register;
+    private FirebaseAuth mAuth;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        FirebaseUser user = mAuth.getInstance().getCurrentUser();
+        Intent goToApp = new Intent(WelcomeScreen.this, FirstApplicationScreen.class);
+        startActivity(goToApp);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +39,26 @@ public class WelcomeScreen extends AppCompatActivity {
 
         login = (Button) findViewById(R.id.btnValidate);
         register = (Button) findViewById(R.id.btnRegister);
+        mAuth = FirebaseAuth.getInstance();
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        login.setOnClickListener(this);
+        register.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnValidate:
+                finish();
                 Intent goToLogin =new Intent(WelcomeScreen.this, LoginScreen.class);
                 startActivity(goToLogin);
-            }
-        });
+                break;
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.btnRegister:
                 Intent goToRegistration =new Intent(WelcomeScreen.this, RegistrationScreen.class);
                 startActivity(goToRegistration);
-            }
-        });
+                break;
+        }
     }
 
     private void readLocationData() {
