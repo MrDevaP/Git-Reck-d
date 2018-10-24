@@ -7,8 +7,8 @@ public class Donation {
     private String timestamp;
     private Location host;
     private String shortDescription, fullDescription;
-    private DonationCategory category;
     private String value;
+    private DonationCategory category;
 
     public Donation(String timestamp, Location host, String shortDescription, String fullDescription, DonationCategory category, String value) {
         this.timestamp = timestamp;

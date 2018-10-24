@@ -1,33 +1,25 @@
 package commrdevapgit_reck_d.httpsgithub.buzztracker;
 
-import java.util.HashMap;
-
 public class User {
 
-    private String username, password;
-    private static HashMap<String, User> users = new HashMap<>();
+    private String email, password;
+    private UserType type;
 
 
-    public User(String username, String password) {
-        if (username.equals("") || password.equals("")) {
-            throw new IllegalArgumentException("Please enter a username and password to register.");
-        } else if (users.containsKey(username)) {
-            throw new IllegalArgumentException("Sorry that username is taken. Please select another.");
-        }
-        this.username = username;
+    public User(String email, String password, UserType type) {
+        this.email = email;
         this.password = password;
-        users.put(username, this);
+        this.type = type;
+        //put into database
     }
 
-    public static HashMap getUsers() {
-        return users;
-    }
-
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
         return password;
     }
+
+    public UserType getType() {return type;}
 }
