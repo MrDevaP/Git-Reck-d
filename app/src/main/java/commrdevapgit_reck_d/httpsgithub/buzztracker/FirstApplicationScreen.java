@@ -32,6 +32,7 @@ public class FirstApplicationScreen extends AppCompatActivity {
                 mAuth.signOut();
                 finish();
                 Intent goToWelcome =new Intent(FirstApplicationScreen.this, WelcomeScreen.class);
+                goToWelcome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(goToWelcome);
             }
         });
@@ -40,6 +41,7 @@ public class FirstApplicationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToLocationsScreen = new Intent(FirstApplicationScreen.this, LocationsScreen.class);
+                goToLocationsScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(goToLocationsScreen);
             }
         });

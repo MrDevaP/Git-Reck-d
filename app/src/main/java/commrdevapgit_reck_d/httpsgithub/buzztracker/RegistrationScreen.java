@@ -99,7 +99,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-//                    sendUserDataToDatabase();
+                    sendUserDataToDatabase();
                     Toast.makeText(getApplicationContext(), "Registration Successful.", Toast.LENGTH_SHORT).show();
                     Intent goToApp = new Intent(RegistrationScreen.this, FirstApplicationScreen.class);
                     goToApp.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -119,16 +119,16 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mReference = mDatabase.getReference(mAuth.getUid());
         int selectedId = type.getCheckedRadioButtonId();
-        User user;
-//        if (selectedId == R.id.radioGeneralUser) {
-//            user = new User(email.getText().toString().trim(), UserType.GENERAL);
-//        } else if (selectedID == R.id.radioLocationEmployee) {
-//            user = new User(email.getText().toString().trim(), UserType.EMPLOYEE);
-//        } else if (selectedID == R.id.radioLocationManager) {
-//            user = new User(email.getText().toString().trim(), UserType.MANAGER);
-//        } else if (selectedID == R.id.radioAdmin) {
-//            user = new User(email.getText().toString().trim(), UserType.ADMIN);
-//        }
-//        mReference.setValue(user);
+        User user = null;
+        if (selectedId == R.id.radioGeneralUser) {
+            user = new User(email.getText().toString().trim(), UserType.GENERAL);
+        } else if (selectedId == R.id.radioLocationEmployee) {
+            user = new User(email.getText().toString().trim(), UserType.EMPLOYEE);
+        } else if (selectedId == R.id.radioLocationManager) {
+            user = new User(email.getText().toString().trim(), UserType.MANAGER);
+        } else if (selectedId == R.id.radioAdmin) {
+            user = new User(email.getText().toString().trim(), UserType.ADMIN);
+        }
+        mReference.setValue(user);
     }
 }

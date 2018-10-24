@@ -48,11 +48,13 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
             case R.id.btnValidate:
                 finish();
                 Intent goToLogin =new Intent(WelcomeScreen.this, LoginScreen.class);
+                goToLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(goToLogin);
                 break;
 
             case R.id.btnRegister:
                 Intent goToRegistration =new Intent(WelcomeScreen.this, RegistrationScreen.class);
+                goToRegistration.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(goToRegistration);
                 break;
         }
