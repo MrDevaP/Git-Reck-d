@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "543736397008-iorn086nod042fociim4tdsi7kekgr61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "commrdevapgit_reck_d.httpsgithub.buzztracker",
+            "certificate_hash": "6960b7b9e90903a2da31ea7cb79f21ad4809e409"
+          }
+        },
+        {
           "client_id": "543736397008-l60bn0efbs53k93m09u1q634bh5dq54v.apps.googleusercontent.com",
           "client_type": 3
         }

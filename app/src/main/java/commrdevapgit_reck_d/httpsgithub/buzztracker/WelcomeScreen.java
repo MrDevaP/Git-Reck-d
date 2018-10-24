@@ -22,16 +22,6 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        FirebaseUser user = mAuth.getInstance().getCurrentUser();
-        Intent goToApp = new Intent(WelcomeScreen.this, FirstApplicationScreen.class);
-        startActivity(goToApp);
-    }
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
@@ -40,6 +30,13 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
         login = (Button) findViewById(R.id.btnValidate);
         register = (Button) findViewById(R.id.btnRegister);
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            finish();
+            startActivity(new Intent(WelcomeScreen.this, FirstApplicationScreen.class));
+        }
 
         login.setOnClickListener(this);
         register.setOnClickListener(this);
