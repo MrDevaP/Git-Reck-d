@@ -70,7 +70,7 @@ public class AddDonation extends AppCompatActivity {
         final String locationAddress = getIntent().getStringExtra("LocationAddress");
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mReference = mDatabase.getReference().child("Location").child(locationAddress).child("Donations");
+        DatabaseReference mReference = mDatabase.getReference().child("Location").child(locationAddress).child("Donations").child(donation.getFullDescription());
         mReference.setValue(donation);
     }
 }

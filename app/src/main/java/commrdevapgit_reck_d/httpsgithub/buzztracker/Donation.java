@@ -7,6 +7,8 @@ public class Donation {
     private String value;
     private DonationCategory category;
 
+    public Donation() {}
+
     public Donation(String timestamp, String shortDescription, String fullDescription, DonationCategory category, String value) {
         this.timestamp = timestamp;
         this.shortDescription = shortDescription;

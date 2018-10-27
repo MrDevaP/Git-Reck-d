@@ -64,7 +64,8 @@ public class DonationsScreen extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d: dataSnapshot.getChildren()) {
                     final Button donation = new Button(DonationsScreen.this);
-                    final Donation don = d.getValue(Donation.class);
+                    Donation don = d.getValue(Donation.class);
+                    final String desc = don.getFullDescription();
                     donation.setText(don.getShortDescription());
                     LinearLayout layoutLocation = (LinearLayout) findViewById(R.id.layoutLocation);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -74,7 +75,7 @@ public class DonationsScreen extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent goToDetails = new Intent(DonationsScreen.this, DonationDetailsScreen.class);
-                            goToDetails.putExtra("DonationDesc", don.getFullDescription());
+                            goToDetails.putExtra("DonationDesc", desc);
                             goToDetails.putExtra("LocationAddress", locationAddress);
                             startActivity(goToDetails);
                         }
