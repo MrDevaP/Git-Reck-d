@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AddDonation extends AppCompatActivity {
 
     private EditText time;
@@ -30,8 +33,7 @@ public class AddDonation extends AppCompatActivity {
         value = (EditText) findViewById(R.id.value);
         category = (Spinner) findViewById(R.id.category);
 
-        final String locationName = getIntent().getStringExtra("LocationName");
-        final Location location = (Location) Location.getLocations().get(locationName);
+        final String locationAddress = getIntent().getStringExtra("LocationAddress");
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, DonationCategory.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -43,13 +45,13 @@ public class AddDonation extends AppCompatActivity {
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Donation donation = new Donation(time.getText().toString(), location, shortDesc.getText().toString(), desc.getText().toString(),
+                Donation donation = new Donation(time.getText().toString(), shortDesc.getText().toString(), desc.getText().toString(),
                         (DonationCategory) category.getSelectedItem(), value.getText().toString());
 
-                location.addDonation(donation);
+                addDonationToLocation(donation);
 
                 Intent goToAddDonation = new Intent(AddDonation.this, DonationsScreen.class);
-                goToAddDonation.putExtra("LocationName", locationName);
+                goToAddDonation.putExtra("LocationAddress", locationAddress);
                 startActivity(goToAddDonation);
             }
         });
@@ -58,9 +60,17 @@ public class AddDonation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToAddDonation = new Intent(AddDonation.this, DonationsScreen.class);
-                goToAddDonation.putExtra("LocationName", locationName);
+                goToAddDonation.putExtra("LocationAddress", locationAddress);
                 startActivity(goToAddDonation);
             }
         });
+    }
+
+    private void addDonationToLocation(Donation donation) {
+        final String locationAddress = getIntent().getStringExtra("LocationAddress");
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("Location").child(locationAddress).child("Donations");
+        mReference.setValue(donation);
     }
 }

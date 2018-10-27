@@ -6,32 +6,16 @@ public class Location {
 
     private String name, type, address, phoneNumber;
     private float latitude, longitude;
-    private static HashMap<String, Location> locations = new HashMap<>();
-    private HashMap<String, Donation> donations = new HashMap<>();
 
+    public Location() {}
 
     public Location(String name, String type, String address, String phoneNumber, float latitude, float longitude) {
-        if (locations.containsKey(name)) {
-            return;
-        }
         this.name = name;
         this.type = type;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.latitude = latitude;
         this.longitude = longitude;
-        locations.put(name, this);
-    }
-
-    public void addDonation(Donation item) {
-        donations.put(item.getShortDescription(), item);
-    }
-    public static HashMap getLocations() {
-        return locations;
-    }
-
-    public HashMap getDonations() {
-        return donations;
     }
 
     public String getName() {

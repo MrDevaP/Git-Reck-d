@@ -117,7 +117,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
 
     private void sendUserDataToDatabase() {
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mReference = mDatabase.getReference(mAuth.getUid());
+        DatabaseReference mReference = mDatabase.getReference().child("User").child(mAuth.getUid());
         int selectedId = type.getCheckedRadioButtonId();
         User user = null;
         if (selectedId == R.id.radioGeneralUser) {
