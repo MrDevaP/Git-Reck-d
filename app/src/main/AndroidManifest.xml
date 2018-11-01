@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="commrdevapgit_reck_d.httpsgithub.buzztracker">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,7 +32,18 @@
             android:label="@string/title_activity_location_details_screen" />
         <activity android:name=".DonationsScreen" />
         <activity android:name=".DonationDetailsScreen" />
-        <activity android:name=".AddDonation"></activity>
+        <activity android:name=".AddDonation" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyALYm7t8GGZ_YJDpqizvIpHjTcqolyo8qQ" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <activity android:name=".LocationMapScreen"></activity>
     </application>
 
 </manifest>
