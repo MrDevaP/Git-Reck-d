@@ -1,4 +1,4 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 
 public class Donation {
 
@@ -36,9 +36,8 @@ public class Donation {
     public String getValue() { return value; }
 
     public String toString() {
-        return "Category:" + getCategory() + "\n" +
-                "Time Donated: " + getTimestamp() + "\n" + "Short Description: " +
-                getShortDescription() + "\n" + "Description: " + getFullDescription() + "\n" + "Value:" +
-                getValue();
+        return "Category: " + getCategory() + "\n" + "Time Donated: " + getTimestamp() + "\n"
+                + "Short Description: " + getShortDescription() + "\n" + "Description: "
+                + getFullDescription() + "\n" + "Value: " + getValue();
     }
 }

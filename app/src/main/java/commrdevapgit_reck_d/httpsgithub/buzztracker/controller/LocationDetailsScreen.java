@@ -1,4 +1,4 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
+import commrdevapgit_reck_d.httpsgithub.buzztracker.model.Location;
 
 public class LocationDetailsScreen extends Activity {
 

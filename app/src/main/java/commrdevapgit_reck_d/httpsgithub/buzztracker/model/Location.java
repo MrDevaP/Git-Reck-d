@@ -1,6 +1,4 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
-
-import java.util.HashMap;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 
 public class Location {
 

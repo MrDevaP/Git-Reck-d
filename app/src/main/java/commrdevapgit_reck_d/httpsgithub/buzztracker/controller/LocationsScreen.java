@@ -1,11 +1,10 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -14,6 +13,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 
 public class LocationsScreen extends Activity {
 
@@ -30,14 +31,13 @@ public class LocationsScreen extends Activity {
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                LinearLayout layoutLocation = (LinearLayout) findViewById(R.id.layoutLocation);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 for (DataSnapshot l: dataSnapshot.getChildren()) {
                     String name = l.child("name").getValue().toString();
                     final String address = l.child("address").getValue().toString();
                     final Button location = new Button(LocationsScreen.this);
                     location.setText(name);
-                    LinearLayout layoutLocation = (LinearLayout) findViewById(R.id.layoutLocation);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    layoutLocation.addView(location, params);
 
                     location.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -47,6 +47,8 @@ public class LocationsScreen extends Activity {
                             startActivity(goToDetails);
                         }
                     });
+
+                    layoutLocation.addView(location, params);
                 }
             }
             @Override

@@ -1,4 +1,4 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.controller;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+
+import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 
 public class FirstApplicationScreen extends AppCompatActivity {
 

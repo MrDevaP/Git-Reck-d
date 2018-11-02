@@ -9,25 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeScreen">
+        <activity android:name=".controller.WelcomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginScreen" />
-        <activity android:name=".FirstApplicationScreen" />
-        <activity android:name=".RegistrationScreen" />
+        <activity android:name=".controller.LoginScreen" />
+        <activity android:name=".controller.FirstApplicationScreen" />
+        <activity android:name=".controller.RegistrationScreen" />
         <activity
-            android:name=".LocationsScreen"
+            android:name=".controller.LocationsScreen"
             android:label="@string/title_activity_locations_screen" />
         <activity
-            android:name=".LocationDetailsScreen"
+            android:name=".controller.LocationDetailsScreen"
             android:label="@string/title_activity_location_details_screen" />
-        <activity android:name=".DonationsScreen" />
-        <activity android:name=".DonationDetailsScreen" />
-        <activity android:name=".AddDonation"></activity>
+        <activity android:name=".controller.DonationsScreen" />
+        <activity android:name=".controller.DonationDetailsScreen" />
+        <activity android:name=".controller.AddDonationScreen"></activity>
     </application>
 
 </manifest>

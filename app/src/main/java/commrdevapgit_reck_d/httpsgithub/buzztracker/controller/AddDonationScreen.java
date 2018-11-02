@@ -1,4 +1,4 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.controller;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,11 @@ import android.widget.Spinner;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AddDonation extends AppCompatActivity {
+import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
+import commrdevapgit_reck_d.httpsgithub.buzztracker.model.Donation;
+import commrdevapgit_reck_d.httpsgithub.buzztracker.model.DonationCategory;
+
+public class AddDonationScreen extends AppCompatActivity {
 
     private EditText time;
     private EditText shortDesc;
@@ -35,9 +39,9 @@ public class AddDonation extends AppCompatActivity {
 
         final String locationAddress = getIntent().getStringExtra("LocationAddress");
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, DonationCategory.values());
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category.setAdapter(adapter2);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, DonationCategory.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(adapter);
 
         newDonation = (Button) findViewById(R.id.btnAddDonation);
         cancel = (Button) findViewById(R.id.btnCancel);
@@ -50,7 +54,7 @@ public class AddDonation extends AppCompatActivity {
 
                 addDonationToLocation(donation);
 
-                Intent goToAddDonation = new Intent(AddDonation.this, DonationsScreen.class);
+                Intent goToAddDonation = new Intent(AddDonationScreen.this, DonationsScreen.class);
                 goToAddDonation.putExtra("LocationAddress", locationAddress);
                 startActivity(goToAddDonation);
             }
@@ -59,7 +63,7 @@ public class AddDonation extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToAddDonation = new Intent(AddDonation.this, DonationsScreen.class);
+                Intent goToAddDonation = new Intent(AddDonationScreen.this, DonationsScreen.class);
                 goToAddDonation.putExtra("LocationAddress", locationAddress);
                 startActivity(goToAddDonation);
             }

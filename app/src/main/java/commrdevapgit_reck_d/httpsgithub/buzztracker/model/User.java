@@ -1,4 +1,4 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 
 public class User {
 
@@ -9,7 +9,6 @@ public class User {
     public User(String email, UserType type) {
         this.email = email;
         this.type = type;
-        //put into database
     }
 
     public String getEmail() {

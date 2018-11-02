@@ -1,4 +1,4 @@
-package commrdevapgit_reck_d.httpsgithub.buzztracker;
+package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 
 public enum DonationCategory {
     CLOTHING("Clothing"),
