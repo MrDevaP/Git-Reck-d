@@ -1,21 +1,36 @@
 package commrdevapgit_reck_d.httpsgithub.buzztracker.controller;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.sql.Connection;
 
 public class WelcomeScreen extends AppCompatActivity implements View.OnClickListener {
 
     private Button login;
     private Button register;
     private FirebaseAuth mAuth;
+
+    private static final int ERROR = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
