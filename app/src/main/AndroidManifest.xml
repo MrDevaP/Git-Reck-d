@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="commrdevapgit_reck_d.httpsgithub.buzztracker">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,16 +14,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeScreen">
+        <activity android:name=".controller.WelcomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginScreen" />
-        <activity android:name=".FirstApplicationScreen" />
-        <activity android:name=".RegistrationScreen"></activity>
+        <activity android:name=".controller.LoginScreen" />
+        <activity android:name=".controller.FirstApplicationScreen" />
+        <activity android:name=".controller.RegistrationScreen" />
+        <activity
+            android:name=".controller.LocationsScreen"
+            android:label="@string/title_activity_locations_screen" />
+        <activity
+            android:name=".controller.LocationDetailsScreen"
+            android:label="@string/title_activity_location_details_screen" />
+        <activity android:name=".controller.DonationsScreen" />
+        <activity android:name=".controller.DonationDetailsScreen" />
+        <activity android:name=".controller.AddDonationScreen"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyALYm7t8GGZ_YJDpqizvIpHjTcqolyo8qQ" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <activity android:name=".controller.LocationMapScreen"></activity>
     </application>
 
 </manifest>

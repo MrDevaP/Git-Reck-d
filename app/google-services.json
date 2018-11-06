@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "543736397008",
+    "firebase_url": "https://buzztracker-89e6c.firebaseio.com",
+    "project_id": "buzztracker-89e6c",
+    "storage_bucket": "buzztracker-89e6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543736397008:android:f8f080585f803986",
+        "android_client_info": {
+          "package_name": "commrdevapgit_reck_d.httpsgithub.buzztracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543736397008-6djbqquu3lqis8rumbb7uee9em8kl08a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "commrdevapgit_reck_d.httpsgithub.buzztracker",
+            "certificate_hash": "ed63839ff6335ae113e77a2ed79f64825f274662"
+          }
+        },
+        {
+          "client_id": "543736397008-iorn086nod042fociim4tdsi7kekgr61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "commrdevapgit_reck_d.httpsgithub.buzztracker",
+            "certificate_hash": "6960b7b9e90903a2da31ea7cb79f21ad4809e409"
+          }
+        },
+        {
+          "client_id": "543736397008-l60bn0efbs53k93m09u1q634bh5dq54v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzJ2LX23XHoWReerqCIh92AoLEa2p47K4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543736397008-l60bn0efbs53k93m09u1q634bh5dq54v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

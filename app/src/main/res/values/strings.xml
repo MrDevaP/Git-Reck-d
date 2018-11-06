@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BuzzTracker</string>
+    <string name="title_activity_locations_screen">LocationsScreen</string>
+    <string name="title_activity_location_details_screen">LocationDetailsScreen</string>
+    <string name="title_activity_donations_screen">DonationsScreen</string>
 </resources>
