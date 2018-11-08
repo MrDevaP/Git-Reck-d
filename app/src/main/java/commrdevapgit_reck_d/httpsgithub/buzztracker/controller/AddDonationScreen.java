@@ -16,6 +16,9 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.Donation;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.DonationCategory;
 
+/**
+ * The type Add donation screen.
+ */
 public class AddDonationScreen extends AppCompatActivity {
 
     private EditText time;

@@ -24,6 +24,9 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.User;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.UserType;
 
+/**
+ * The type Registration screen.
+ */
 public class RegistrationScreen extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
@@ -34,6 +37,9 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
     private TextView failedRegistration;
     private FirebaseAuth mAuth;
 
+    /**
+     * The constant isLocationEmployee.
+     */
     public static boolean isLocationEmployee = false;
 
     @Override

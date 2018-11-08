@@ -21,6 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 
+/**
+ * The type Location map screen.
+ */
 public class LocationMapScreen extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override

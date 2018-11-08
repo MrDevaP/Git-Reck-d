@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 
+/**
+ * The type Login screen.
+ */
 public class LoginScreen extends AppCompatActivity {
 
     private Button login;

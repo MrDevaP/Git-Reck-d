@@ -1,9 +1,24 @@
 package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 
+/**
+ * The enum User type.
+ */
 public enum UserType {
+    /**
+     * General user type.
+     */
     GENERAL("General"),
+    /**
+     * Employee user type.
+     */
     EMPLOYEE("Employee"),
+    /**
+     * Manager user type.
+     */
     MANAGER("Manager"),
+    /**
+     * Admin user type.
+     */
     ADMIN("Admin");
 
     private String _representation = "";

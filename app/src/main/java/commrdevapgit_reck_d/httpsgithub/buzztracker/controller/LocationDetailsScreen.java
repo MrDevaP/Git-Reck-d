@@ -17,6 +17,9 @@ import com.google.firebase.database.ValueEventListener;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.Location;
 
+/**
+ * The type Location details screen.
+ */
 public class LocationDetailsScreen extends Activity {
 
     private EditText details;

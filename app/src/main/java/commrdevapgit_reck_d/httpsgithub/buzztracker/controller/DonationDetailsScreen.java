@@ -14,6 +14,9 @@ import com.google.firebase.database.ValueEventListener;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.Donation;
 
+/**
+ * The type Donation details screen.
+ */
 public class DonationDetailsScreen extends AppCompatActivity {
 
     private EditText details;

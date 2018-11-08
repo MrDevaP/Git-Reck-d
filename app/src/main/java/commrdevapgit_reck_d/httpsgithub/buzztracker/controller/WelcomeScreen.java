@@ -24,6 +24,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.sql.Connection;
 
+/**
+ * The type Welcome screen.
+ */
 public class WelcomeScreen extends AppCompatActivity implements View.OnClickListener {
 
     private Button login;

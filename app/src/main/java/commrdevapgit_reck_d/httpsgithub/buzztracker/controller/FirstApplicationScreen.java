@@ -14,6 +14,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 
+/**
+ * The type First application screen.
+ */
 public class FirstApplicationScreen extends AppCompatActivity {
 
     private Button logout, locations, locationMap;
@@ -64,6 +67,12 @@ public class FirstApplicationScreen extends AppCompatActivity {
             });
         }
     }
+
+    /**
+     * Method to determine if services are running as expected
+     *
+     * @return boolean of whether or not services are running
+     */
     public boolean isServicesOk() {
         int avail = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(FirstApplicationScreen.this);
 

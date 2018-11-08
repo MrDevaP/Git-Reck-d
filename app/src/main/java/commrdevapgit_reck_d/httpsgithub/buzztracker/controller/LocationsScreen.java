@@ -16,6 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 
+/**
+ * The type Locations screen.
+ */
 public class LocationsScreen extends Activity {
 
     @Override
