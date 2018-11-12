@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
+import commrdevapgit_reck_d.httpsgithub.buzztracker.model.DonationCategory;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.User;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.UserType;
 
@@ -33,7 +36,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
     private Button cancel;
     private EditText email;
     private EditText password;
-    private RadioGroup type;
+    private Spinner type;
     private TextView failedRegistration;
     private FirebaseAuth mAuth;
 
@@ -51,11 +54,13 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
         cancel = (Button) findViewById(R.id.btnCancel);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
-        type = (RadioGroup) findViewById(R.id.radioTypes);
-        failedRegistration = (TextView) findViewById(R.id.failedRegistration);
+        type = (Spinner) findViewById(R.id.type);
         mAuth = FirebaseAuth.getInstance();
 
-        failedRegistration.setText("");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserType.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        type.setAdapter(adapter);
 
         register.setOnClickListener(this);
 
@@ -127,17 +132,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
     private void sendUserDataToDatabase() {
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mReference = mDatabase.getReference().child("User").child(mAuth.getUid());
-        int selectedId = type.getCheckedRadioButtonId();
-        User user = null;
-        if (selectedId == R.id.radioGeneralUser) {
-            user = new User(email.getText().toString().trim(), UserType.GENERAL);
-        } else if (selectedId == R.id.radioLocationEmployee) {
-            user = new User(email.getText().toString().trim(), UserType.EMPLOYEE);
-        } else if (selectedId == R.id.radioLocationManager) {
-            user = new User(email.getText().toString().trim(), UserType.MANAGER);
-        } else if (selectedId == R.id.radioAdmin) {
-            user = new User(email.getText().toString().trim(), UserType.ADMIN);
-        }
-        mReference.setValue(user);
+        User newUser = new User(email.getText().toString().trim(), (UserType) type.getSelectedItem());;
+        mReference.setValue(newUser);
     }
 }
