@@ -12,6 +12,8 @@ public class DonationManager {
         } else {
             if (!value.matches("(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d\\d)?$")) {
                 throw new IllegalArgumentException("Value must be in the correct format, $x.xx");
+            } else {
+                return "$" + value;
             }
         }
         return value;
