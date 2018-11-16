@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,11 +39,6 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
     private Spinner type;
     private FirebaseAuth mAuth;
 
-    /**
-     * The constant isLocationEmployee.
-     */
-    protected static boolean isLocationEmployee;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +52,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
         mAuth = FirebaseAuth.getInstance();
 
 
+        //noinspection unchecked
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout
                 .simple_spinner_item, UserType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -123,8 +118,8 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     sendUserDataToDatabase();
-                    Toast toast = Toast.makeText(getApplicationContext(), "Registration Successful.",
-                            Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Registration Successful.", Toast.LENGTH_SHORT);
                     toast.show();
                     Intent goToApp = new Intent(RegistrationScreen.this,
                             FirstApplicationScreen.class);
@@ -132,8 +127,8 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
                     startActivity(goToApp);
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        Toast toast2 = Toast.makeText(getApplicationContext(), "Email is already registered.",
-                                Toast.LENGTH_SHORT);
+                        Toast toast2 = Toast.makeText(getApplicationContext(),
+                                "Email is already registered.", Toast.LENGTH_SHORT);
                         toast2.show();
                     } else {
                         Context appContext = getApplicationContext();

@@ -100,8 +100,8 @@ public class LoginScreen extends AppCompatActivity {
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(newEmail, newPassword)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        Task signin = mAuth.signInWithEmailAndPassword(newEmail, newPassword);
+        signin.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -111,10 +111,12 @@ public class LoginScreen extends AppCompatActivity {
                 } else {
                     Context appContext = getApplicationContext();
                     Exception taskException = task.getException();
-                    String taskMessage = taskException.getMessage();
-                    String s = Objects.requireNonNull(taskMessage);
-                    Toast toast = Toast.makeText(appContext, s, Toast.LENGTH_SHORT);
-                    toast.show();
+                    if (taskException != null) {
+                        String taskMessage = taskException.getMessage();
+                        String s = Objects.requireNonNull(taskMessage);
+                        Toast toast = Toast.makeText(appContext, s, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
             }
         });

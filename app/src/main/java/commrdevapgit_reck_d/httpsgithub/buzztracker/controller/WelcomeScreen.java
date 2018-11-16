@@ -16,7 +16,7 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
  */
 public class WelcomeScreen extends AppCompatActivity implements View.OnClickListener {
 
-    private static final int ERROR = 9001;
+    // --Commented out by Inspection (11/16/2018 3:51 AM):private static final int ERROR = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

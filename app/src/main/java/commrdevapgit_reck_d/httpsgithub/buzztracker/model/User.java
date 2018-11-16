@@ -5,8 +5,8 @@ package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
  */
 public class User {
 
-    private final String email;
-    private final UserType type;
+    private String email;
+    private UserType type;
 
 
     /**
@@ -20,19 +20,12 @@ public class User {
         this.type = type;
     }
 
-    /**
-     * Gets email.
-     *
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
-    public UserType getType() {return type;}
+// --Commented out by Inspection START (11/16/2018 3:55 AM):
+//    /**
+//     * Gets type.
+//     *
+//     * @return the type
+//     */
+//    public UserType getType() {return type;}
+// --Commented out by Inspection STOP (11/16/2018 3:55 AM)
 }

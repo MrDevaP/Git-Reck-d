@@ -45,7 +45,9 @@ public class LocationDetailsScreen extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Location loc = dataSnapshot.getValue(Location.class);
-                details.setText(loc.toString());
+                if (loc != null) {
+                    details.setText(loc.toString());
+                }
             }
 
             @Override

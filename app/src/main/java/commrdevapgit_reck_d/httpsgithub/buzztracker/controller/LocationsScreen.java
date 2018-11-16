@@ -48,7 +48,8 @@ public class LocationsScreen extends Activity {
                     String name = obj.toString();
                     DataSnapshot childAddress = l.child("address");
                     Object val = childAddress.getValue();
-                    final String address = val.toString();
+                    Object o = Objects.requireNonNull(val);
+                    final String address = o.toString();
                     final Button location = new Button(LocationsScreen.this);
                     location.setText(name);
 

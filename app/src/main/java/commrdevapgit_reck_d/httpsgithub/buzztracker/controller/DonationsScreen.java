@@ -48,9 +48,9 @@ public class DonationsScreen extends AppCompatActivity {
 
         filterDonations = findViewById(R.id.spnFilter);
         searchBar = findViewById(R.id.search);
-        Intent intentTemp = getIntent();
-        locationAddress = intentTemp.getStringExtra("LocationAddress");
-        //locationAddress = getIntent().getStringExtra("LocationAddress");
+
+        Intent intent = getIntent();
+        locationAddress = intent.getStringExtra("LocationAddress");
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -63,28 +63,26 @@ public class DonationsScreen extends AppCompatActivity {
         }
         filterOptions.addAll(stringOps);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, filterOptions);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(this, android.R.layout.simple_spinner_item, filterOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filterDonations.setAdapter(adapter);
-
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDataReference = mDatabase.getReference();
         DatabaseReference mChild = mDataReference.child("User");
-        FirebaseUser mAuthUser = mAuth.getCurrentUser();
-        String Uid = mAuthUser.getUid();
+        FirebaseUser mAuthUser;
+        mAuthUser = mAuth.getCurrentUser();
+        String Uid = "";
+        if (mAuthUser != null) {
+            Uid = mAuthUser.getUid();
+        }
         String obj = Objects.requireNonNull(Uid);
         DatabaseReference userInfo = mChild.child(obj);
-        //DatabaseReference userInfo = mDatabase.getReference().child("User").child(Objects
-        //        .requireNonNull(mAuth.getCurrentUser()).getUid());
 
         DatabaseReference mReference1 = mDatabase.getReference();
         DatabaseReference mChild1 = mReference1.child("Location");
         DatabaseReference mChild2 = mChild1.child(locationAddress);
         final DatabaseReference mReference = mChild2.child("Donations");
-        //final DatabaseReference mReference = mDatabase.getReference().child("Location")
-        //       .child(locationAddress).child("Donations");
-
         addDonation = findViewById(R.id.btnAddDonation);
         addDonation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,14 +96,13 @@ public class DonationsScreen extends AppCompatActivity {
         userInfo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DataSnapshot dataSnapChild = dataSnapshot.child("type");
-                Object dataValue = dataSnapChild.getValue();
-                Object obj = Objects.requireNonNull(dataValue);
-                String type = obj.toString();
-                //String type = Objects.requireNonNull(dataSnapshot.child("type").getValue())
-                //        .toString();
-                if (!"EMPLOYEE".equals(type)) {
-                    addDonation.setEnabled(false);
+                DataSnapshot child = dataSnapshot.child("type");
+                Object value = child.getValue();
+                if (value != null) {
+                    String type = value.toString();
+                    if (!"EMPLOYEE".equals(type)) {
+                        addDonation.setEnabled(false);
+                    }
                 }
             }
 
@@ -160,34 +157,31 @@ public class DonationsScreen extends AppCompatActivity {
     private void addFilteredDonations(DataSnapshot dataSnapshot) {
         LinearLayout layoutLocation = findViewById(R.id.layoutLocation);
         layoutLocation.removeAllViews();
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams
-                .MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         for (DataSnapshot d : dataSnapshot.getChildren()) {
             Donation don = d.getValue(Donation.class);
-            Object filterItem = filterDonations.getSelectedItem();
-            String filterString = filterItem.toString();
-            Object donObj = Objects.requireNonNull(don);
-            DonationCategory donCategory = ((Donation) donObj).getCategory();
-            String donString = donCategory.toString();
+            Object donItem = filterDonations.getSelectedItem();
+            String donString = donItem.toString();
+            String donShortDesc = "";
+            DonationCategory donCategory = null;
+            if (don != null) {
+                donCategory = don.getCategory();
+                donShortDesc = don.getShortDescription();
+            }
+            String category = "";
+            if (donCategory != null) {
+                category = donCategory.toString();
+            }
             Editable searchText = searchBar.getText();
             String searchString = searchText.toString();
-            boolean searchEmpty = searchString.isEmpty();
-            String donDesc = ((Donation) donObj).getShortDescription();
-            String donLowerDesc = donDesc.toLowerCase();
-            String searchLower = searchString.toLowerCase();
-            boolean descContains = donLowerDesc.contains(searchLower);
-            //if (((filterDonations.getSelectedItem().toString().compareTo("All") == 0)
-            //        || (filterDonations.getSelectedItem().toString().compareTo(Objects
-            //        .requireNonNull(don).getCategory()
-            //        .toString()) == 0))
-            //        && (searchBar.getText().toString().isEmpty()
-            //        || Objects.requireNonNull(don).getShortDescription()
-            //       .toLowerCase().contains(searchBar.getText().toString().toLowerCase()))) {
-            if (((filterString.compareTo("All") == 0) || (filterString.compareTo(donString) == 0))
-                    && (searchEmpty || descContains)) {
+            String donLower = donShortDesc.toLowerCase();
+            if (((donString.compareTo("All") == 0)
+                    || (donString.compareTo(category) == 0))
+                    && ((searchString.isEmpty())
+                    || donLower.contains(searchString.toLowerCase()))) {
 
-                Donation donsString = Objects.requireNonNull(don);
-                final String desc = donsString.getFullDescription();
+                final String desc = don.getFullDescription();
                 final Button donation = new Button(DonationsScreen.this);
 
                 donation.setOnClickListener(new View.OnClickListener() {

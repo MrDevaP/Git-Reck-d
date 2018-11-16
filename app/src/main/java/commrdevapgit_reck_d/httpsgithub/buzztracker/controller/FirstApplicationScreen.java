@@ -20,6 +20,7 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 public class FirstApplicationScreen extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private final int ERROR = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,6 @@ public class FirstApplicationScreen extends AppCompatActivity {
         if (avail == ConnectionResult.SUCCESS) {
             return true;
         } else if (instance.isUserResolvableError(avail)) {
-            int ERROR = 9001;
             Dialog dialog = instance
                     .getErrorDialog(FirstApplicationScreen.this, avail, ERROR);
             dialog.show();

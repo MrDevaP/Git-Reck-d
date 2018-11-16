@@ -32,7 +32,9 @@ public class LocationMapScreen extends AppCompatActivity implements OnMapReadyCa
 
         FragmentManager mFragment = getSupportFragmentManager();
         SupportMapFragment mapFragment = (SupportMapFragment) mFragment.findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
     }
 
     @Override
