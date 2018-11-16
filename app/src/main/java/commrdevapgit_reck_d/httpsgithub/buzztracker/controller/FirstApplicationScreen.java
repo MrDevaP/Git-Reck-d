@@ -19,18 +19,15 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
  */
 public class FirstApplicationScreen extends AppCompatActivity {
 
-    private Button logout, locations, locationMap;
     private FirebaseAuth mAuth;
-
-    private int ERROR = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_application_screen);
 
-        logout = (Button) findViewById(R.id.btnLogout);
-        locations = (Button) findViewById(R.id.btnLocations);
+        Button logout = findViewById(R.id.btnLogout);
+        Button locations = findViewById(R.id.btnLocations);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -49,18 +46,20 @@ public class FirstApplicationScreen extends AppCompatActivity {
         locations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToLocationsScreen = new Intent(FirstApplicationScreen.this, LocationsScreen.class);
+                Intent goToLocationsScreen = new Intent(FirstApplicationScreen.this,
+                        LocationsScreen.class);
                 goToLocationsScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(goToLocationsScreen);
             }
         });
 
         if (isServicesOk()) {
-            locationMap = (Button) findViewById(R.id.btnLocationMap);
+            Button locationMap = findViewById(R.id.btnLocationMap);
             locationMap.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent goToLocationMap = new Intent(FirstApplicationScreen.this, LocationMapScreen.class);
+                    Intent goToLocationMap = new Intent(FirstApplicationScreen.this,
+                            LocationMapScreen.class);
                     goToLocationMap.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(goToLocationMap);
                 }
@@ -73,16 +72,23 @@ public class FirstApplicationScreen extends AppCompatActivity {
      *
      * @return boolean of whether or not services are running
      */
-    public boolean isServicesOk() {
-        int avail = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(FirstApplicationScreen.this);
+    private boolean isServicesOk() {
+        GoogleApiAvailability googleAvail = GoogleApiAvailability.getInstance();
+        int avail = googleAvail
+                .isGooglePlayServicesAvailable(FirstApplicationScreen.this);
 
+        GoogleApiAvailability instance = GoogleApiAvailability.getInstance();
         if (avail == ConnectionResult.SUCCESS) {
             return true;
-        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(avail)) {
-            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(FirstApplicationScreen.this, avail, ERROR);
+        } else if (instance.isUserResolvableError(avail)) {
+            int ERROR = 9001;
+            Dialog dialog = instance
+                    .getErrorDialog(FirstApplicationScreen.this, avail, ERROR);
             dialog.show();
         } else {
-            Toast.makeText(FirstApplicationScreen.this, "Error", Toast.LENGTH_SHORT).show();
+            Toast toastText = Toast.makeText(FirstApplicationScreen.this, "Error",
+                    Toast.LENGTH_SHORT);
+            toastText.show();
         }
         return false;
     }

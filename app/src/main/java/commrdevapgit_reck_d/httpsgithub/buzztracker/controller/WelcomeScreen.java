@@ -16,10 +16,6 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
  */
 public class WelcomeScreen extends AppCompatActivity implements View.OnClickListener {
 
-    private Button login;
-    private Button register;
-    private FirebaseAuth mAuth;
-
     private static final int ERROR = 9001;
 
     @Override
@@ -28,9 +24,9 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_welcome_screen);
 //        readLocationData();
 
-        login = (Button) findViewById(R.id.btnValidate);
-        register = (Button) findViewById(R.id.btnRegister);
-        mAuth = FirebaseAuth.getInstance();
+        Button login = findViewById(R.id.btnValidate);
+        Button register = findViewById(R.id.btnRegister);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -81,8 +77,10 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
 //                float latitude = Float.parseFloat(items[2]);
 //                float longitude = Float.parseFloat(items[3]);
 //
-//                Location newLocation = new Location(name, type, address, phoneNumber, latitude, longitude);
-//                DatabaseReference mReference = mDatabase.getReference().child("Location").child(newLocation.getAddress());
+//                Location newLocation =new Location(name, type, address, phoneNumber,
+//                      latitude,longitude);
+//                DatabaseReference mReference = mDatabase.getReference().child("Location")
+//                      .child(newLocation.getAddress());
 //                mReference.setValue(newLocation);
 //
 //                line = reader.readLine();

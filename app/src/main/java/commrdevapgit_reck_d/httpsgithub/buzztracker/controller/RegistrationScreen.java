@@ -1,15 +1,16 @@
 package commrdevapgit_reck_d.httpsgithub.buzztracker.controller;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +23,10 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+import java.util.regex.Matcher;
+
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
-import commrdevapgit_reck_d.httpsgithub.buzztracker.model.DonationCategory;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.User;
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.UserType;
 
@@ -32,33 +35,31 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.model.UserType;
  */
 public class RegistrationScreen extends AppCompatActivity implements View.OnClickListener {
 
-    private Button register;
-    private Button cancel;
     private EditText email;
     private EditText password;
     private Spinner type;
-    private TextView failedRegistration;
     private FirebaseAuth mAuth;
 
     /**
      * The constant isLocationEmployee.
      */
-    public static boolean isLocationEmployee = false;
+    protected static boolean isLocationEmployee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_screen);
 
-        register = (Button) findViewById(R.id.btnRegister);
-        cancel = (Button) findViewById(R.id.btnCancel);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-        type = (Spinner) findViewById(R.id.type);
+        Button register = findViewById(R.id.btnRegister);
+        Button cancel = findViewById(R.id.btnCancel);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        type = findViewById(R.id.type);
         mAuth = FirebaseAuth.getInstance();
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserType.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout
+                .simple_spinner_item, UserType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         type.setAdapter(adapter);
 
@@ -82,8 +83,14 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
     }
 
     private void registerUser() {
-        String newEmail = email.getText().toString().trim();
-        String newPassword = password.getText().toString().trim();
+        Editable emailText = email.getText();
+        String emailString = emailText.toString();
+        String newEmail = emailString.trim();
+        //String newEmail = email.getText().toString().trim();
+        Editable passwordText = password.getText();
+        String passwordString = passwordText.toString();
+        String newPassword = passwordString.trim();
+        //String newPassword = password.getText().toString().trim();
 
         if (newEmail.isEmpty()) {
             email.setError("Email required");
@@ -97,32 +104,45 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) {
+        Matcher emailMatch = Patterns.EMAIL_ADDRESS.matcher(newEmail);
+        if (!emailMatch.matches()) {
             email.setError("Please enter a valid email.");
             email.requestFocus();
             return;
         }
 
-        if (newPassword.length() < 8 || !newPassword.matches(".*\\d+.*")) {
-            password.setError("Password must be at least 8 characters and must contain at least one number.");
+        if ((newPassword.length() < 8) || !newPassword.matches(".*\\d+.*")) {
+            password.setError("Password must be at least 8 characters and must contain at " +
+                    "least one number.");
             password.requestFocus();
             return;
         }
-
-        mAuth.createUserWithEmailAndPassword(newEmail, newPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        Task mAuthCreate = mAuth.createUserWithEmailAndPassword(newEmail, newPassword);
+        mAuthCreate.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     sendUserDataToDatabase();
-                    Toast.makeText(getApplicationContext(), "Registration Successful.", Toast.LENGTH_SHORT).show();
-                    Intent goToApp = new Intent(RegistrationScreen.this, FirstApplicationScreen.class);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Registration Successful.",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                    Intent goToApp = new Intent(RegistrationScreen.this,
+                            FirstApplicationScreen.class);
                     goToApp.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(goToApp);
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        Toast.makeText(getApplicationContext(), "Email is already registered.", Toast.LENGTH_SHORT).show();
+                        Toast toast2 = Toast.makeText(getApplicationContext(), "Email is already registered.",
+                                Toast.LENGTH_SHORT);
+                        toast2.show();
                     } else {
-                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Context appContext = getApplicationContext();
+                        Exception e = task.getException();
+                        Object obj = Objects.requireNonNull(e);
+                        String appMessage = ((Exception) obj).getMessage();
+                        Toast toastText = Toast.makeText(appContext, appMessage,
+                                Toast.LENGTH_SHORT);
+                        toastText.show();
                     }
                 }
             }
@@ -131,8 +151,16 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
 
     private void sendUserDataToDatabase() {
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mReference = mDatabase.getReference().child("User").child(mAuth.getUid());
-        User newUser = new User(email.getText().toString().trim(), (UserType) type.getSelectedItem());;
+        DatabaseReference mDataReference = mDatabase.getReference();
+        DatabaseReference mChild1 = mDataReference.child("User");
+        String mUid = mAuth.getUid();
+        String o = Objects.requireNonNull(mUid);
+        DatabaseReference mReference = mChild1.child(o);
+        Editable emailText = email.getText();
+        String emailString = emailText.toString();
+        String emailTrim = emailString.trim();
+        UserType userType = (UserType) type.getSelectedItem();
+        User newUser = new User(emailTrim, userType);
         mReference.setValue(newUser);
     }
 }

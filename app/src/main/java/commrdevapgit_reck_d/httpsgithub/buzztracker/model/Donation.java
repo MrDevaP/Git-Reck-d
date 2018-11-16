@@ -6,7 +6,8 @@ package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 public class Donation {
 
     private String timestamp;
-    private String shortDescription, fullDescription;
+    private String shortDescription;
+    private String fullDescription;
     private String value;
     private DonationCategory category;
 
@@ -24,7 +25,8 @@ public class Donation {
      * @param category         the category
      * @param value            the value
      */
-    public Donation(String timestamp, String shortDescription, String fullDescription, DonationCategory category, String value) {
+    public Donation(String timestamp, String shortDescription, String fullDescription,
+                    DonationCategory category, String value) {
         this.timestamp = timestamp;
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;

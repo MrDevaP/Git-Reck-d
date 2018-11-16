@@ -5,8 +5,8 @@ package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
  */
 public class User {
 
-    private String email;
-    private UserType type;
+    private final String email;
+    private final UserType type;
 
 
     /**

@@ -29,7 +29,7 @@ public enum DonationCategory {
      */
     OTHER("Other");
 
-    private String _representation = "";
+    private final String _representation;
 
     DonationCategory(String representation) {_representation = representation;}
 

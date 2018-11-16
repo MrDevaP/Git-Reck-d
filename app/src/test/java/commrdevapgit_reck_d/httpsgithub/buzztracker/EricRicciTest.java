@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import commrdevapgit_reck_d.httpsgithub.buzztracker.model.DonationManager;
-import commrdevapgit_reck_d.httpsgithub.buzztracker.model.RegistrationManager;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

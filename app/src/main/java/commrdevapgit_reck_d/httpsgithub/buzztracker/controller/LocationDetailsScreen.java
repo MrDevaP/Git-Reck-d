@@ -23,19 +23,23 @@ import commrdevapgit_reck_d.httpsgithub.buzztracker.model.Location;
 public class LocationDetailsScreen extends Activity {
 
     private EditText details;
-    private Button donations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_details_screen);
-        final String locationAddress = getIntent().getStringExtra("LocationAddress");
+        //Intent intentTemp = getIntent();
+        //final String locationAddress = intentTemp.getStringExtra("LocationAddress");
+        Intent intent = getIntent();
+        final String locationAddress = intent.getStringExtra("LocationAddress");
 
-        details = (EditText) findViewById(R.id.viewDetails);
-        donations = (Button) findViewById(R.id.btnDonations);
+        details = findViewById(R.id.viewDetails);
+        Button donations = findViewById(R.id.btnDonations);
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mReference = mDatabase.getReference().child("Location").child(locationAddress);
+        DatabaseReference referenceTemp = mDatabase.getReference();
+        DatabaseReference refChild = referenceTemp.child("Location");
+        DatabaseReference mReference = refChild.child(locationAddress);
 
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,7 +57,8 @@ public class LocationDetailsScreen extends Activity {
         donations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToDonationsScreen = new Intent(LocationDetailsScreen.this, DonationsScreen.class);
+                Intent goToDonationsScreen = new Intent(LocationDetailsScreen.this,
+                        DonationsScreen.class);
                 goToDonationsScreen.putExtra("LocationAddress", locationAddress);
                 startActivity(goToDonationsScreen);
             }

@@ -1,9 +1,20 @@
 package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 
+import java.util.Objects;
+
+/**
+ * The type Donation manager.
+ */
 public class DonationManager {
 
+    /**
+     * Check value string.
+     *
+     * @param value the value
+     * @return the string
+     */
     public static String checkValue(String value) {
-        if (value == "") {
+        if (Objects.equals(value, "")) {
             throw new IllegalArgumentException("Donation must contain a value.");
         } else if (value.startsWith("$")) {
             if (!value.matches("^\\$(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d\\d)?$")) {
@@ -19,12 +30,4 @@ public class DonationManager {
         return value;
     }
 
-    public static int checkDate(String date) {
-        if (date == "") {
-            throw new IllegalArgumentException("Date must not be empty");
-        } else if (!date.matches("\\d{2}/\\d{2}/\\d{4}")) {
-            throw new IllegalArgumentException("Date must be in the correct format, mm/dd/yyyy");
-        }
-        return 1;
-    }
 }

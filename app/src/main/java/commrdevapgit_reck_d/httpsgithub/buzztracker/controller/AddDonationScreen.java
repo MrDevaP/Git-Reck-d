@@ -3,6 +3,7 @@ package commrdevapgit_reck_d.httpsgithub.buzztracker.controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,34 +27,41 @@ public class AddDonationScreen extends AppCompatActivity {
     private EditText desc;
     private EditText value;
     private Spinner category;
-    private Button newDonation;
-    private Button cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
 
-        time = (EditText) findViewById(R.id.time);
-        shortDesc = (EditText) findViewById(R.id.shortDesc);
-        desc = (EditText) findViewById(R.id.description);
-        value = (EditText) findViewById(R.id.value);
-        category = (Spinner) findViewById(R.id.category);
+        time = findViewById(R.id.time);
+        shortDesc = findViewById(R.id.shortDesc);
+        desc = findViewById(R.id.description);
+        value = findViewById(R.id.value);
+        category = findViewById(R.id.category);
 
-        final String locationAddress = getIntent().getStringExtra("LocationAddress");
+        final Intent intentTemp = getIntent();
+        final String locationAddress = intentTemp.getStringExtra("LocationAddress");
+        //final String locationAddress = getIntent().getStringExtra("LocationAddress");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, DonationCategory.values());
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                        DonationCategory.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
 
-        newDonation = (Button) findViewById(R.id.btnAddDonation);
-        cancel = (Button) findViewById(R.id.btnCancel);
+        Button newDonation = findViewById(R.id.btnAddDonation);
+        Button cancel = findViewById(R.id.btnCancel);
 
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Donation donation = new Donation(time.getText().toString(), shortDesc.getText().toString(), desc.getText().toString(),
-                        (DonationCategory) category.getSelectedItem(), value.getText().toString());
+                Editable timeText = time.getText();
+                Editable shortDescText = shortDesc.getText();
+                Editable descText = desc.getText();
+                Editable valueText = value.getText();
+                Donation donation = new Donation(timeText.toString(),
+                        shortDescText.toString(), descText.toString(),
+                        (DonationCategory) category.getSelectedItem(), valueText.toString());
 
                 addDonationToLocation(donation);
 
@@ -74,10 +82,19 @@ public class AddDonationScreen extends AppCompatActivity {
     }
 
     private void addDonationToLocation(Donation donation) {
-        final String locationAddress = getIntent().getStringExtra("LocationAddress");
+        Intent intentTemp = getIntent();
+        final String locationAddress = intentTemp.getStringExtra("LocationAddress");
+        //final String locationAddress = getIntent().getStringExtra("LocationAddress");
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mReference = mDatabase.getReference().child("Location").child(locationAddress).child("Donations").child(donation.getFullDescription());
+        DatabaseReference mDataReference1 = mDatabase.getReference();
+        DatabaseReference mDataReference2 = mDataReference1.child("Location");
+        DatabaseReference mDataReference3 = mDataReference2.child(locationAddress);
+        DatabaseReference mDataReference4 = mDataReference3.child("Donations");
+        String donationDescription = donation.getFullDescription();
+        DatabaseReference mReference = mDataReference4.child(donationDescription);
+        //DatabaseReference mReference = mDatabase.getReference().child("Location")
+        //        .child(locationAddress).child("Donations").child(donation.getFullDescription());
         mReference.setValue(donation);
     }
 }

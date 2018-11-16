@@ -1,7 +1,9 @@
 package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
 
-public class UserManager {
+class UserManager {
     public static boolean checkCanAdd(User user) {
-        return user.getType().equals(UserType.EMPLOYEE);
+        UserType returnTemp = user.getType();
+        return returnTemp.equals(UserType.EMPLOYEE);
+        //return user.getType().equals(UserType.EMPLOYEE);
     }
 }

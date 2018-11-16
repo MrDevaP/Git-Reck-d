@@ -14,6 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import commrdevapgit_reck_d.httpsgithub.buzztracker.R;
 
 /**
@@ -29,23 +31,32 @@ public class LocationsScreen extends Activity {
     }
     private void getLocations() {
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mReference = mDatabase.getReference().child("Location");
+        DatabaseReference referenceTemp = mDatabase.getReference();
+        DatabaseReference mReference = referenceTemp.child("Location");
+        //DatabaseReference mReference = mDatabase.getReference().child("Location");
 
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                LinearLayout layoutLocation = (LinearLayout) findViewById(R.id.layoutLocation);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout layoutLocation = findViewById(R.id.layoutLocation);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout
+                        .LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 for (DataSnapshot l: dataSnapshot.getChildren()) {
-                    String name = l.child("name").getValue().toString();
-                    final String address = l.child("address").getValue().toString();
+                    DataSnapshot childName = l.child("name");
+                    Object value = childName.getValue();
+                    Object obj = Objects.requireNonNull(value);
+                    String name = obj.toString();
+                    DataSnapshot childAddress = l.child("address");
+                    Object val = childAddress.getValue();
+                    final String address = val.toString();
                     final Button location = new Button(LocationsScreen.this);
                     location.setText(name);
 
                     location.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent goToDetails = new Intent(LocationsScreen.this, LocationDetailsScreen.class);
+                            Intent goToDetails = new Intent(LocationsScreen.this,
+                                    LocationDetailsScreen.class);
                             goToDetails.putExtra("LocationAddress", address);
                             startActivity(goToDetails);
                         }

@@ -21,7 +21,7 @@ public enum UserType {
      */
     ADMIN("Admin");
 
-    private String _representation = "";
+    private final String _representation;
 
     UserType(String representation) {_representation = representation;}
 

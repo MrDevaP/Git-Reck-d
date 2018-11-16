@@ -5,8 +5,12 @@ package commrdevapgit_reck_d.httpsgithub.buzztracker.model;
  */
 public class Location {
 
-    private String name, type, address, phoneNumber;
-    private float latitude, longitude;
+    private String name;
+    private String type;
+    private String address;
+    private String phoneNumber;
+    private float latitude;
+    private float longitude;
 
     /**
      * Instantiates a new Location.
@@ -23,7 +27,8 @@ public class Location {
      * @param latitude    the latitude
      * @param longitude   the longitude
      */
-    public Location(String name, String type, String address, String phoneNumber, float latitude, float longitude) {
+    public Location(String name, String type, String address, String phoneNumber, float latitude,
+                    float longitude) {
         this.name = name;
         this.type = type;
         this.address = address;
