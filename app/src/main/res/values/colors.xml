@@ -2,5 +2,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary" tools:keep="@color/colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#233169</color>
-    <color name="colorAccent" tools:keep="@color/colorAccent">#FF4081</color>
+    <color name="colorAccent" tools:keep="@color/colorAccent">#8d5d0a</color>
 </resources>
