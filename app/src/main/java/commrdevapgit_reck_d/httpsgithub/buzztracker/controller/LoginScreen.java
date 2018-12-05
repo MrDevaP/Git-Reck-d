@@ -32,6 +32,7 @@ public class LoginScreen extends AppCompatActivity {
     private EditText password;
 
     private FirebaseAuth mAuth;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,13 @@ public class LoginScreen extends AppCompatActivity {
         String newPassword = passwordString.trim();
         //String newPassword = password.getText().toString().trim();
 
+        if (count >= 3) {
+            Toast countToast = Toast.makeText(getApplicationContext(),
+                    "Login attempts is greater than 3 cannot login.", Toast.LENGTH_SHORT);
+            countToast.show();
+            return;
+        }
+
         if (newEmail.isEmpty()) {
             email.setError("email required");
             email.requestFocus();
@@ -109,6 +117,7 @@ public class LoginScreen extends AppCompatActivity {
                     goToApp.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(goToApp);
                 } else {
+                    count++;
                     Context appContext = getApplicationContext();
                     Exception taskException = task.getException();
                     if (taskException != null) {
